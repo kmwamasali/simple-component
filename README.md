@@ -1,0 +1,2 @@
+# simple-component
+Simple component
