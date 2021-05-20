@@ -2,42 +2,46 @@
 
 (function(){
 
-  const template = document.createElement('div');
+  function createListNode(classname) {
+    const HTMLnode = document.createElement('div');
   
-  template.innerHTML = `
-    <div id="custom-list">
-    <input type="search" class="search" placeholder="normal search">
-      <ul class="list">
-        <li>
-          <h3 class="name">Jonny</h3>
-          <p class="city">Stockholm</p>
-        </li>
-        <li>
-          <h3 class="name">Jonas</h3>
-          <p class="city">Berlin</p>
-        </li>
-      </ul>
-    </div>
-  `;
+    HTMLnode.innerHTML = `
+      <div id="${classname}">
+        <input type="search" class="search" placeholder="normal search">
+        <button class="sort" data-sort="name">
+          Sort by Name
+        </button>
+        <ul class="list"></ul>
+      </div>
+    `;
+
+    return HTMLnode
+  }
 
   class CustomList extends HTMLElement {
     constructor(args) {
       super(args);
-      //set static list Item
-      //TODO: Make Dynamic
+      // array of list items
+      this.values =  [
+        { name: 'kevin', city: 'kampala' },
+        { name: 'Jonny', city: 'Stockholm' },
+        { name: 'Jonas', city: 'Berlin' }
+      ]
+      //set list options and DOM item
       this.options = {
         valueNames: ['name', 'city'],
+        item: '<li><h3 class="name"></h3><p class="city"></p></li>'
       };
       // attach shadow dom
       const shadow = this.attachShadow({ mode: 'open' });
 
+      const template = createListNode('custom-list');
+
+      // using list object imported from list.js from cdn
+      new List(template, this.options, this.values);
+
       //append container to shadow dom
       shadow.appendChild(template);
-
-      if (template.isConnected) {
-        let templateList = new List('custom-list', this.options);
-        templateList.add({ name: 'kevin', city: 'kampala' });
-      }
     }
   }
   customElements.define('show-lists', CustomList);

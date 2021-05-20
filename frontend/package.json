@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "list.js": "^2.3.1",
     "path": "^0.12.7",
     "whatwg-fetch": "1.0.0"
   },
