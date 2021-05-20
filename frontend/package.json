@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Native List Component",
   "scripts": {
-    "prestart": "babel-node buildScripts/startMessage",
     "start": "npm-run-all --parallel open:src lint:watch test:watch",
     "start:server": "node server.js",
     "lint": "esw --color",

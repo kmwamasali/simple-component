@@ -1,37 +1,43 @@
-"use strict";
+'use strict';
 
 (function(){
+
+  const template = document.createElement('div');
+  
+  template.innerHTML = `
+    <div id="custom-list">
+    <input type="search" class="search" placeholder="normal search">
+      <ul class="list">
+        <li>
+          <h3 class="name">Jonny</h3>
+          <p class="city">Stockholm</p>
+        </li>
+        <li>
+          <h3 class="name">Jonas</h3>
+          <p class="city">Berlin</p>
+        </li>
+      </ul>
+    </div>
+  `;
+
   class CustomList extends HTMLElement {
     constructor(args) {
       super(args);
       //set static list Item
       //TODO: Make Dynamic
-      this.listItem = {
-        valueNames: ['name', 'born'],
-        item: '<li><h3 class="name"></h3><p class="born"></p></li>'
+      this.options = {
+        valueNames: ['name', 'city'],
       };
-      //set static list values
-      this.values = [
-        {
-          name: 'Tom Boya',
-          born: 1986
-        },
-        {
-          name: 'Jane Boya',
-          born: 1994
-        }
-      ];
       // attach shadow dom
       const shadow = this.attachShadow({ mode: 'open' });
 
-      // create List Container
-      const listContainer = document.createElement('ul');
-      listContainer.classList.add('list');
+      //append container to shadow dom
+      shadow.appendChild(template);
 
-     //TODO: Attach ListJS component
-
-      //append container ro shadow dom
-      shadow.appendChild(listContainer);
+      if (template.isConnected) {
+        let templateList = new List('custom-list', this.options);
+        templateList.add({ name: 'kevin', city: 'kampala' });
+      }
     }
   }
   customElements.define('show-lists', CustomList);
