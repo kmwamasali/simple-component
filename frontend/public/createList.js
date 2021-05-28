@@ -1,22 +1,9 @@
 'use strict';
 
+import createComponentListNode from './componenListNode.js';
+import styles from "./styles.js";
+
 (function(){
-
-  function createListNode(classname) {
-    const HTMLnode = document.createElement('div');
-  
-    HTMLnode.innerHTML = `
-      <div id="${classname}">
-        <input type="search" class="search" placeholder="normal search">
-        <button class="sort" data-sort="name">
-          Sort by Name
-        </button>
-        <ul class="list"></ul>
-      </div>
-    `;
-
-    return HTMLnode
-  }
 
   class CustomList extends HTMLElement {
     constructor(args) {
@@ -35,14 +22,19 @@
       // attach shadow dom
       const shadow = this.attachShadow({ mode: 'open' });
 
-      const template = createListNode('custom-list');
+      const template = createComponentListNode()('custom-list');
 
       // using list object imported from list.js from cdn
       new List(template, this.options, this.values);
 
+      //append container styles
+      shadow.appendChild(styles)
       //append container to shadow dom
       shadow.appendChild(template);
     }
   }
+
+  //add the custom component to HTML DOM
   customElements.define('show-lists', CustomList);
+
 })()
