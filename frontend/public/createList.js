@@ -1,6 +1,6 @@
 'use strict';
 
-import createComponentListNode from './componenListNode.js';
+import createComponentListNode from './componenListNode.mjs';
 import styles from "./styles.js";
 
 (function(){
