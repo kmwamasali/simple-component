@@ -8,6 +8,9 @@ export default function createComponentListNode() {
         <button class="sort" data-sort="name">
           Sort by Name
         </button>
+        <button id="getList">
+          Fetch List items
+        </button>
         <ul class="list"></ul>
       </div>
     `;

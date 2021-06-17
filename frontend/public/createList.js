@@ -32,6 +32,15 @@ import styles from "./styles.js";
       //append container to shadow dom
       shadow.appendChild(template);
     }
+
+    connectedCallback() {
+      const btn = this.shadowRoot.getElementById('getList');
+      btn.addEventListener('click', () => {
+        fetch('http://localhost:3000')
+          .then(response => response.json())
+          .then(data => console.log(data))
+      })
+    }
   }
 
   //add the custom component to HTML DOM
